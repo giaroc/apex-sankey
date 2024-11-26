@@ -1,6 +1,20 @@
 {
   "name": "ng-apex-sankey",
   "version": "0.1.0",
+  "description": "Angular library for creating customizable Sankey diagrams using ApexSankey.js",
+  "author": "Giacomo Rocco",
+  "keywords": [
+    "angular",
+    "ng",
+    "apex",
+    "chart",
+    "sankey"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/giaroc/apex-sankey.git"
+  },
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^18.2.0",
     "@angular/core": "^18.2.0",
