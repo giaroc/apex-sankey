@@ -5,7 +5,6 @@
   </p>
   <p align="center">
     <a href="https://your-demo-link.com">Online Demo</a> |
-    <a href="https://github.com/yourusername/ng-apex-sankey-starter">Starter</a>
     <a href="https://apexcharts.com/apexsankey/">ApexSankey.js</a>
   </p>
   <p align="center">

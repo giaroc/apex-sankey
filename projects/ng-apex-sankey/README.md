@@ -4,7 +4,7 @@
     Angular library for creating customizable Sankey diagrams using ApexSankey.js
   </p>
   <p align="center">
-    <a href="https://your-demo-link.com">Online Demo</a> 
+    <a href="https://your-demo-link.com">Online Demo</a> |
     <a href="https://apexcharts.com/apexsankey/">ApexSankey.js</a>
   </p>
   <p align="center">
