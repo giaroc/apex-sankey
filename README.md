@@ -1,4 +1,7 @@
 <div align="center">
+  <a href="https://github.com/giaroc/apex-sankey">
+    <img src="./src/assets/ng-apex-sankey-logo.png" alt="Logo" width="80">
+  </a>
   <h3 align="center">NG-APEX-SANKEY</h3>
   <p align="center">
     Angular library for creating customizable Sankey diagrams using ApexSankey.js
