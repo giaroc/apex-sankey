@@ -188,7 +188,24 @@ export class AppComponent implements OnInit {
   sankeyOptions1String!: string;
   sankeyOptions2String!: string;
   sankeyData2String!: string;
-  sankeyData3String!: string;
+  sankeyData3String: string = `sankeyData3: SankeyData = {
+    nodes: [
+      {id: 'Source1', title: 'Source 1'},
+      {id: 'Source2', title: 'Source 2'},
+      {id: 'Source3', title: 'Source 3'},
+      {id: 'Source4', title: 'Source 4'},
+      {id: 'Target1', title: 'Target 1'},
+      {id: 'Target2', title: 'Target 2'},
+      {id: 'Target3', title: 'Target 3'},
+      {id: 'Target4', title: 'Target 4'},
+      {id: 'Target5', title: 'Target 5'},
+      {id: 'Target6', title: 'Target 6'},
+      {id: 'Target7', title: 'Target 7'},
+      {id: 'Target8', title: 'Target 8'}
+    ],
+    edges: this.generateRandomEdges()
+  };
+  `;
 
   // Function string for display
   generateRandomFunction: string = `
@@ -236,7 +253,7 @@ export class AppComponent implements OnInit {
     this.sankeyOptions1String = 'sankeyOptions1: SankeyOptions = ' + JSON.stringify(this.sankeyOptions1, null, 2);
     this.sankeyOptions2String = 'sankeyOptions2: SankeyOptions = ' + JSON.stringify(this.sankeyOptions2, null, 2);
     this.sankeyData2String = 'sankeyData2: SankeyData = ' + JSON.stringify(this.sankeyData2, null, 2);
-    this.sankeyData3String = 'sankeyData3: SankeyData = ' + JSON.stringify(this.sankeyData3, null, 2);
+    //this.sankeyData3String = 'sankeyData3: SankeyData = ' + JSON.stringify(this.sankeyData3, null, 2);
   }
 
   // Generate random edges for dynamic Sankey data
