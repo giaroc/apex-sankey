@@ -30,6 +30,7 @@
 
 # Latest Update
 
+* 2024.11.27: Version 0.1.2 release with dynamic data updates.
 * 2024.11.26: Initial release
 
 # Installation
@@ -49,7 +50,7 @@ Import `SankeyChartComponent` in your Angular component:
 
 ```typescript
 import { Component } from '@angular/core';
-import { SankeyChartComponent, SankeyOptions } from 'ng-apex-sankey';
+import { SankeyChartComponent, SankeyData, SankeyOptions } from 'ng-apex-sankey';
 
 @Component({
   selector: 'app-root',
@@ -59,7 +60,7 @@ import { SankeyChartComponent, SankeyOptions } from 'ng-apex-sankey';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  public sankeyOptions: SankeyOptions = {
+  public sankeyData: SankeyData = {
     nodes: [
       { id: 'Homepage', title: 'Homepage' },
       { id: 'ProductPage', title: 'Product Page' },
@@ -75,7 +76,10 @@ export class AppComponent {
       { source: 'Cart', target: 'Checkout', value: 150 },
       { source: 'Cart', target: 'Exit', value: 50 },
       { source: 'Checkout', target: 'Exit', value: 150 }
-    ],
+    ]
+  };
+
+  public sankeyOptions: SankeyOptions = {
     graphOptions: {
       width: 800,
       height: 600,
@@ -88,10 +92,9 @@ export class AppComponent {
 ```
 
 # API
-The SankeyChartComponent accepts a `SankeyOptions` object which includes nodes, edges, and graph options for customization.
+The `SankeyChartComponent` accepts two main inputs: `SankeyData` for nodes and edges, and `SankeyOptions` for customization.
 
-## SankeyOptions Configuration
-
+## SankeyData Configuration
 ### Nodes
 
 - **id**: Unique identifier for the node.
@@ -119,6 +122,9 @@ The SankeyChartComponent accepts a `SankeyOptions` object which includes nodes, 
     }
 ```
 - **alignLinkTypes**: (optional) Boolean indicating whether to align link types across nodes. Default: false.
+
+
+## SankeyOptions Configuration
 
 ### GraphOptions
 

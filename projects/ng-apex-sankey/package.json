@@ -1,6 +1,6 @@
 {
   "name": "ng-apex-sankey",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Angular library for creating customizable Sankey diagrams using ApexSankey.js",
   "author": "Giacomo Rocco",
   "keywords": [

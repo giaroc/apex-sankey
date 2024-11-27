@@ -1,18 +1,25 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RouterOutlet} from '@angular/router';
-import {SankeyChartComponent, SankeyOptions} from "ng-apex-sankey";
-import {JsonPipe} from "@angular/common";
+import {SankeyChartComponent, SankeyData, SankeyOptions} from "ng-apex-sankey";
+import {Highlight} from 'ngx-highlightjs';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, SankeyChartComponent, JsonPipe],
+  imports: [RouterOutlet, SankeyChartComponent, Highlight],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'apex-sankey';
-  public sankeyOptions1: SankeyOptions = {
+
+  // HTML strings for displaying Sankey charts
+  sankeyHtml1: string = '<apx-sankey [sankeyData]="sankeyData1" [sankeyOptions]="sankeyOptions1"></apx-sankey>';
+  sankeyHtml2: string = '<apx-sankey [sankeyData]="sankeyData2" [sankeyOptions]="sankeyOptions2"></apx-sankey>';
+  sankeyHtml3: string = '<apx-sankey [sankeyData]="sankeyData3"></apx-sankey>';
+
+  // Sankey data and options
+  sankeyData1: SankeyData = {
     nodes: [
       {id: 'England', title: 'england'},
       {id: 'Wales', title: 'wales'},
@@ -36,13 +43,11 @@ export class AppComponent {
       {source: 'England', target: 'Level 2', value: 8},
       {source: 'England', target: 'Level 1 and entry level', value: 6},
       {source: 'England', target: 'No qualifications', value: 3},
-      // { source: 'England', target: 'Other', value: 4 },
       {source: 'Wales', target: 'Level 4', value: 7},
       {source: 'Wales', target: 'Level 3', value: 8},
       {source: 'Wales', target: 'Level 2', value: 4},
       {source: 'Wales', target: 'Level 1 and entry level', value: 5},
       {source: 'Wales', target: 'No qualifications', value: 5},
-      // { source: 'Wales', target: 'Other', value: 3 },
       {source: 'Level 4', target: 'Wholesale & retail', value: 4},
       {source: 'Level 4', target: 'Health & social work', value: 3},
       {source: 'Level 4', target: 'Education', value: 2},
@@ -82,20 +87,22 @@ export class AppComponent {
       {source: 'No qualifications', target: 'Manufacturing', value: 1},
       {source: 'No qualifications', target: 'Other', value: 1},
       {source: 'No qualifications', target: 'Transport & storage', value: 1},
-      {source: 'No qualifications', target: 'Finance & insurance', value: 1},
-    ],
+      {source: 'No qualifications', target: 'Finance & insurance', value: 1}
+    ]
+  };
+
+  sankeyOptions1: SankeyOptions = {
     graphOptions: {
       width: 800,
       height: 400,
       nodeWidth: 20,
       fontFamily: 'Quicksand, sans-serif',
       fontWeight: 600,
-      edgeOpacity: 0.2,
+      edgeOpacity: 0.2
     }
   };
 
-
-  public sankeyOptions2: SankeyOptions = {
+  sankeyData2: SankeyData = {
     nodes: [
       {id: 'Homepage', title: 'Homepage'},
       {id: 'ProductPage', title: 'Product Page'},
@@ -114,10 +121,13 @@ export class AppComponent {
     ],
     options: {
       order: [
-        [["Homepage"]], [["ProductPage", "Cart"]], [["Cart", "Checkout"]], [["Checkout", "Exit"]], [["Exit"]],
+        [["Homepage"]], [["ProductPage", "Cart"]], [["Cart", "Checkout"]], [["Checkout", "Exit"]], [["Exit"]]
       ],
       alignLinkTypes: false
-    },
+    }
+  };
+
+  sankeyOptions2: SankeyOptions = {
     graphOptions: {
       width: 800,
       height: 600,
@@ -151,8 +161,110 @@ export class AppComponent {
             </div>
             <div style='margin-left:auto; font-size:14px; color:#666;'>Value: <strong>${data.value}</strong></div>
           </div>
-      `
-      },
+        `;
+      }
     }
   };
+
+  sankeyData3: SankeyData = {
+    nodes: [
+      {id: 'Source1', title: 'Source 1'},
+      {id: 'Source2', title: 'Source 2'},
+      {id: 'Source3', title: 'Source 3'},
+      {id: 'Source4', title: 'Source 4'},
+      {id: 'Target1', title: 'Target 1'},
+      {id: 'Target2', title: 'Target 2'},
+      {id: 'Target3', title: 'Target 3'},
+      {id: 'Target4', title: 'Target 4'},
+      {id: 'Target5', title: 'Target 5'},
+      {id: 'Target6', title: 'Target 6'},
+      {id: 'Target7', title: 'Target 7'},
+      {id: 'Target8', title: 'Target 8'}
+    ],
+    edges: this.generateRandomEdges()
+  };
+
+  // String representations for highlighting
+  sankeyOptions1String!: string;
+  sankeyOptions2String!: string;
+  sankeyData2String!: string;
+  sankeyData3String!: string;
+
+  // Function string for display
+  generateRandomFunction: string = `
+    ngOnInit() {
+      setInterval(() => {
+        this.updateSankeyData();
+      }, 3000);
+    }
+
+    generateRandomEdges(): any[] {
+      const sources: string[] = ['Source1', 'Source2', 'Source3', 'Source4'];
+      const targets: string[] = ['Target1', 'Target2', 'Target3', 'Target4', 'Target5', 'Target6', 'Target7', 'Target8'];
+      const edges: any[] = [];
+
+      sources.forEach(source => {
+        targets.forEach(target => {
+          if (Math.random() > 0.5) { // Random condition to create an edge
+            edges.push({
+              source: source,
+              target: target,
+              value: Math.floor(Math.random() * 100) + 1 // Random value between 1 and 100
+            });
+          }
+        });
+      });
+
+      return edges;
+    }
+
+    updateSankeyData() {
+      this.sankeyData3 = {
+        ...this.sankeyData3,
+        edges: this.generateRandomEdges()
+      };
+    }
+  `;
+
+  ngOnInit() {
+    // Update data every 3 seconds
+    setInterval(() => {
+      this.updateSankeyData();
+    }, 3000);
+
+    // Convert options to string for display
+    this.sankeyOptions1String = 'sankeyOptions1: SankeyOptions = ' + JSON.stringify(this.sankeyOptions1, null, 2);
+    this.sankeyOptions2String = 'sankeyOptions2: SankeyOptions = ' + JSON.stringify(this.sankeyOptions2, null, 2);
+    this.sankeyData2String = 'sankeyData2: SankeyData = ' + JSON.stringify(this.sankeyData2, null, 2);
+    this.sankeyData3String = 'sankeyData3: SankeyData = ' + JSON.stringify(this.sankeyData3, null, 2);
+  }
+
+  // Generate random edges for dynamic Sankey data
+  generateRandomEdges(): any[] {
+    const sources: string[] = ['Source1', 'Source2', 'Source3', 'Source4'];
+    const targets: string[] = ['Target1', 'Target2', 'Target3', 'Target4', 'Target5', 'Target6', 'Target7', 'Target8'];
+    const edges: any[] = [];
+
+    sources.forEach(source => {
+      targets.forEach(target => {
+        if (Math.random() > 0.5) { // Random condition to create an edge
+          edges.push({
+            source: source,
+            target: target,
+            value: Math.floor(Math.random() * 100) + 1 // Random value between 1 and 100
+          });
+        }
+      });
+    });
+
+    return edges;
+  }
+
+  // Update Sankey data with new random edges
+  updateSankeyData() {
+    this.sankeyData3 = {
+      ...this.sankeyData3,
+      edges: this.generateRandomEdges()
+    };
+  }
 }

@@ -1,31 +1,42 @@
 <div style="text-align:center; margin-top: 20px;">
   <img src="../assets/ng-apex-sankey-logo.png" alt="App Logo" style="width: 80px; margin-bottom: 20px;">
   <h1>Sankey Diagram Examples</h1>
-  <a href="https://github.com/giaroc/apex-sankey" target="_blank" style="display: inline-block; margin-top: 10px; text-decoration: none; color: #007bff;">
+  <a href="https://github.com/giaroc/apex-sankey" target="_blank"
+     style="display: inline-block; margin-top: 10px; text-decoration: none; color: #007bff;">
     View on GitHub
   </a>
 </div>
 
 <div style="margin: 40px auto; max-width: 800px;">
   <h2>Standard Example</h2>
-  <div id="sankey-container-normal" style="text-align:center; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
-    <apx-sankey [sankeyOptions]="sankeyOptions1"></apx-sankey>
+  <div id="sankey-container-normal"
+       style="text-align:center; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
+    <apx-sankey [sankeyData]="sankeyData1" [sankeyOptions]="sankeyOptions1"></apx-sankey>
   </div>
-  <pre style="background-color: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto;">
-    <code>
-      {{ sankeyOptions1 | json }}
-    </code>
-  </pre>
+  <pre class="b-1 radius-5"><code [highlight]="sankeyHtml1" language="html"></code></pre>
+  <pre class="b-1 radius-5"><code [highlight]="sankeyOptions1String" language="typescript"></code></pre>
 </div>
 
 <div style="margin: 40px auto; max-width: 800px;">
   <h2>Complex Node Order</h2>
-  <div id="sankey-container-order" style="text-align:center; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
-    <apx-sankey [sankeyOptions]="sankeyOptions2"></apx-sankey>
+  <div id="sankey-container-order"
+       style="text-align:center; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
+    <apx-sankey [sankeyData]="sankeyData2" [sankeyOptions]="sankeyOptions2"></apx-sankey>
   </div>
-  <pre style="background-color: #f4f4f4; padding: 10px; border-radius: 5px; overflow-x: auto;">
-    <code>
-      {{ sankeyOptions2 | json }}
-    </code>
-  </pre>
+
+  <pre class="b-1 radius-5"><code [highlight]="sankeyHtml2" language="html"></code></pre>
+  <pre class="b-1 radius-5"><code [highlight]="sankeyData2String" language="typescript"></code></pre>
+  <pre class="b-1 radius-5"><code [highlight]="sankeyOptions2String" language="typescript"></code></pre>
+</div>
+
+<div style="margin: 40px auto; max-width: 800px;">
+  <h2>Dynamic Update</h2>
+  <div id="sankey-container-update"
+       style="text-align:center; border: 1px solid #eee; padding: 20px; border-radius: 8px;">
+    <apx-sankey [sankeyData]="sankeyData3"></apx-sankey>
+  </div>
+
+  <pre class="b-1 radius-5"><code [highlight]="sankeyHtml3" language="html"></code></pre>
+  <pre class="b-1 radius-5"><code [highlight]="sankeyData3String" language="typescript"></code></pre>
+  <pre class="b-1 radius-5"><code [highlight]="generateRandomFunction" language="typescript"></code></pre>
 </div>

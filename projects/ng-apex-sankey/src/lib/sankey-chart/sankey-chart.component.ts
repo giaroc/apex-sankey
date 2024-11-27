@@ -2,13 +2,17 @@
 import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import ApexSankey from 'apexsankey';
 
-export type SankeyOptions = {
+
+export type SankeyData = {
   nodes: { id: string; title: string }[];
   edges: { source: string; target: string; value: number, type?: string }[];
   options?: {
     order?: string[][][],
     alignLinkTypes?: boolean
   };
+};
+
+export type SankeyOptions = {
   graphOptions?: {
     width?: number;
     height?: number;
@@ -35,12 +39,22 @@ export type SankeyOptions = {
 @Component({
   selector: 'apx-sankey',
   standalone: true,
-  imports: [],
   templateUrl: './sankey-chart.component.html',
-  styleUrl: './sankey-chart.component.css'
+  styleUrls: ['./sankey-chart.component.css']
 })
 export class SankeyChartComponent implements OnInit {
+  private chartInstance: any;
+  private internalGraphOptions: any;
+  private _sankeyData!: SankeyData; // Internal variable
+
   @Input() sankeyOptions!: SankeyOptions;
+
+  @Input() set sankeyData(data: SankeyData) {
+    this._sankeyData = data;
+    if (this.chartInstance) {
+      this.rerenderChart(data);
+    }
+  }
 
   constructor(private el: ElementRef) {
   }
@@ -62,13 +76,32 @@ export class SankeyChartComponent implements OnInit {
           <div>${data.target.title}</div>
           <div>: ${data.value}</div>
         </div>
-      `
+      `;
       },
     };
 
-    const graphOptions = {...defaultGraphOptions, ...this.sankeyOptions.graphOptions};
+    if (this.sankeyOptions)
+      this.internalGraphOptions = {...defaultGraphOptions, ...this.sankeyOptions.graphOptions};
+    else
+      this.internalGraphOptions = {...defaultGraphOptions}
 
-    const s = new ApexSankey(this.el.nativeElement.querySelector('#svg-sankey'), graphOptions);
-    s.render(this.sankeyOptions);
+    this.renderChart(this._sankeyData);
+  }
+
+  renderChart(data: SankeyData) {
+    const container = this.el.nativeElement.querySelector('#svg-sankey');
+    if (container) {
+      this.chartInstance = new ApexSankey(container, this.internalGraphOptions);
+      this.chartInstance.render(data);
+    }
+  }
+
+  rerenderChart(data: SankeyData) {
+    console.log("Rerender chart");
+    const container = this.el.nativeElement.querySelector('#svg-sankey');
+    if (container) {
+      container.innerHTML = ''; // Clear the existing chart
+      this.renderChart(data); // Re-render with new data
+    }
   }
 }
