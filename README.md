@@ -111,8 +111,7 @@ The `SankeyChartComponent` accepts two main inputs: `SankeyData` for nodes and e
 
 - **order**: (optional) A list of layers defining the order of nodes. It's a list of bands, each containing node IDs. Example:
 
-```
-    json
+```json
 
     {
       "order": [
