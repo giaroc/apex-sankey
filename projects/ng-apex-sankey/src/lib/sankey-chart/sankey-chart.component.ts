@@ -97,7 +97,6 @@ export class SankeyChartComponent implements OnInit {
   }
 
   rerenderChart(data: SankeyData) {
-    console.log("Rerender chart");
     const container = this.el.nativeElement.querySelector('#svg-sankey');
     if (container) {
       container.innerHTML = ''; // Clear the existing chart
